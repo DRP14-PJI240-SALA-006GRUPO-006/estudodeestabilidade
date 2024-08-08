@@ -1,0 +1,27 @@
+{
+  "name": "estudodeestabilidade",
+  "version": "1.0.0",
+  "description": "Software web para criação de fichas de estudos de estabilidade de cosméticos.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DRP14-PJI240-SALA-006GRUPO-006/estudodeestabilidade.git"
+  },
+  "author": "Marcos Cassiano - marcoscassiano@outlook.com.br",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DRP14-PJI240-SALA-006GRUPO-006/estudodeestabilidade/issues"
+  },
+  "homepage": "https://github.com/DRP14-PJI240-SALA-006GRUPO-006/estudodeestabilidade#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.5.2"
+  }
+}
