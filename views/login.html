@@ -1,1 +1,66 @@
-<h1>Login</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="login-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+            
+            if (response.ok) {
+                // Salva o token no sessionStorage
+                sessionStorage.setItem('token', result.token);
+                
+                // Define um tempo de expiração de 40 minutos
+                const expirationTime = new Date().getTime() + 40 * 60 * 1000;
+                sessionStorage.setItem('tokenExpiration', expirationTime);
+
+                // Redireciona para a página inicial
+                window.location.href = '/';
+            } else {
+                // Exibe a mensagem de erro
+                alert('Login falhou: ' + result.msg);
+            }
+        });
+
+        // Função para verificar a expiração do token
+        function checkTokenExpiration() {
+            const expirationTime = sessionStorage.getItem('tokenExpiration');
+            if (expirationTime && new Date().getTime() > expirationTime) {
+                // Remove o token se expirado
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('tokenExpiration');
+                alert('Sua sessão expirou. Por favor, faça login novamente.');
+                window.location.href = '/login';
+            }
+        }
+
+        // Verifica a expiração do token ao carregar a página
+        window.onload = checkTokenExpiration;
+    </script>
+</body>
+</html>

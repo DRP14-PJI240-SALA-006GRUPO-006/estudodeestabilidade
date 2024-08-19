@@ -1,1 +1,26 @@
-<h1>Estudos</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studies</title>
+</head>
+<body>
+    <h1>Studies</h1>
+    <a href="/studies/create">Create New Study</a>
+    <ul id="studies-list"></ul>
+    <script>
+        async function loadStudies() {
+            const response = await fetch('/api/studies');
+            const studies = await response.json();
+            const studiesList = document.getElementById('studies-list');
+            studies.forEach(study => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="/studies/${study._id}">${study.projectName}</a>`;
+                studiesList.appendChild(li);
+            });
+        }
+        loadStudies();
+    </script>
+</body>
+</html>

@@ -1,1 +1,113 @@
-<h1>Criar Estudo</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Study</title>
+</head>
+<body>
+    <h1>Create Study</h1>
+    <form id="create-study-form">
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="projectName" name="projectName" required>
+        <br>
+        <label for="client">Client:</label>
+        <input type="text" id="client" name="client" required>
+        <br>
+        <label for="contraType">Contra Type:</label>
+        <input type="text" id="contraType" name="contraType" required>
+        <br>
+        <label for="routine">Routine:</label>
+        <input type="text" id="routine" name="routine" required>
+        <br>
+        <label for="product">Product:</label>
+        <input type="text" id="product" name="product" required>
+        <br>
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" required>
+        <br>
+        <label for="batch">Batch:</label>
+        <input type="text" id="batch" name="batch" required>
+        <br>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+        <br>
+        <h3>Initial Conditions (Day 0)</h3>
+        <label for="aspect">Aspect:</label>
+        <input type="text" id="aspect" name="day0[aspect]" required>
+        <br>
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="day0[color]" required>
+        <br>
+        <label for="odor">Odor:</label>
+        <input type="text" id="odor" name="day0[odor]" required>
+        <br>
+        <label for="viscosity">Viscosity:</label>
+        <input type="text" id="viscosity" name="day0[viscosity]" required>
+        <br>
+        <label for="ph">PH:</label>
+        <input type="text" id="ph" name="day0[ph]" required>
+        <br>
+        <label for="density">Density:</label>
+        <input type="text" id="density" name="day0[density]" required>
+        <br>
+        <button type="submit">Create Study</button>
+    </form>
+
+    <script>
+        document.getElementById('create-study-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            data.day0 = {
+                aspect: formData.get('day0[aspect]'),
+                color: formData.get('day0[color]'),
+                odor: formData.get('day0[odor]'),
+                viscosity: formData.get('day0[viscosity]'),
+                ph: formData.get('day0[ph]'),
+                density: formData.get('day0[density]')
+            };
+
+            const token = sessionStorage.getItem('token');
+            if (!token) {
+                alert('Você precisa estar logado para criar um estudo.');
+                window.location.href = '/login';
+                return;
+            }
+
+            const response = await fetch('/api/studies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': `${token}`
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert('Estudo criado com sucesso!');
+                window.location.href = '/studies';
+            } else {
+                alert('Falha ao criar o estudo: ' + result.msg);
+            }
+        });
+
+        // Função para verificar a expiração do token
+        function checkTokenExpiration() {
+            const expirationTime = sessionStorage.getItem('tokenExpiration');
+            if (expirationTime && new Date().getTime() > expirationTime) {
+                // Remove o token se expirado
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('tokenExpiration');
+                alert('Sua sessão expirou. Por favor, faça login novamente.');
+                window.location.href = '/login';
+            }
+        }
+
+        // Verifica a expiração do token ao carregar a página
+        window.onload = checkTokenExpiration;
+    </script>
+</body>
+</html>
