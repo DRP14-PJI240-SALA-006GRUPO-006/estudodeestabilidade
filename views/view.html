@@ -1,54 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Study</title>
+    <link rel="stylesheet" href="/css/view.css">
+    <title>Estudo de Estabilidade</title>
 </head>
 <body>
-    <h1 id="projectName">Study Details</h1>
-    <p id="client"></p>
-    <p id="contraType"></p>
-    <p id="routine"></p>
-    <p id="product"></p>
-    <p id="code"></p>
-    <p id="batch"></p>
-    <p id="startDate"></p>
+    <h1>ESTUDO DE ESTABILIDADE</h1>
+    <p><strong>Produto:</strong> <span id="product"></span></p>
+    <p><strong>Lote:</strong> <span id="lot"></span></p>
+    <p><strong>Natureza:</strong> <span id="nature"></span></p>
+    <div id="conditionsTables"></div>
 
-    <h2>Conditions</h2>
-    <div id="conditions"></div>
-
-    <script>
-        async function loadStudy() {
-            const studyId = window.location.pathname.split('/').pop();
-            const response = await fetch(`/api/studies/${studyId}`);
-            const study = await response.json();
-
-            document.getElementById('projectName').textContent = study.projectName;
-            document.getElementById('client').textContent = `Client: ${study.client}`;
-            document.getElementById('contraType').textContent = `Contra Type: ${study.contraType}`;
-            document.getElementById('routine').textContent = `Routine: ${study.routine}`;
-            document.getElementById('product').textContent = `Product: ${study.product}`;
-            document.getElementById('code').textContent = `Code: ${study.code}`;
-            document.getElementById('batch').textContent = `Batch: ${study.batch}`;
-            document.getElementById('startDate').textContent = `Start Date: ${new Date(study.startDate).toLocaleDateString()}`;
-
-            const conditions = document.getElementById('conditions');
-            for (let condition in study.conditions) {
-                const conditionDiv = document.createElement('div');
-                conditionDiv.innerHTML = `<h3>${condition}</h3>`;
-                for (let day in study.conditions[condition]) {
-                    const dayDiv = document.createElement('div');
-                    dayDiv.innerHTML = `<h4>${day}</h4>`;
-                    for (let prop in study.conditions[condition][day]) {
-                        dayDiv.innerHTML += `<p>${prop}: ${study.conditions[condition][day][prop]}</p>`;
-                    }
-                    conditionDiv.appendChild(dayDiv);
-                }
-                conditions.appendChild(conditionDiv);
-            }
-        }
-        loadStudy();
-    </script>
+    <script src="/js/view.js"></script>
 </body>
 </html>

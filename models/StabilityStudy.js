@@ -1,32 +1,25 @@
-// models/StabilityStudy.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const commentSchema = new Schema({
-    text: String,
-    createdAt: { type: Date, default: Date.now },
-    createdBy: String
+    date: { type: Date, default: Date.now },
+    comment: String
 });
 
 const conditionSchema = new Schema({
     aspect: String,
     color: String,
     odor: String,
+    pH: String,
     viscosity: String,
-    ph: String,
-    density: String
-})
+});
 
 const stabilityStudySchema = new Schema({
-    projectNumber: Number,
-    projectName: String,
-    client: String,
-    contraType: String,
-    routine: String,
+    projectNumber: { type: Number, unique: true },
     product: String,
-    code: String,
     lot: String,
+    nature: String,
     startDate: Date,
     conditions: {
         estufa: {
@@ -62,11 +55,14 @@ const stabilityStudySchema = new Schema({
             day90: conditionSchema
         }
     },
-    comments: [commentSchema],
+    comments: {
+        type: Map,
+        of: commentSchema
+    },
     approved: Boolean,
     responsible: String
-})
+});
 
-stabilityStudySchema.plugin(AutoIncrement, {inc_field: 'numero'})
+stabilityStudySchema.plugin(AutoIncrement, { inc_field: 'projectNumber' });
 
-module.exports = mongoose.model('StabilityStudy', stabilityStudySchema)
+module.exports = mongoose.model('StabilityStudy', stabilityStudySchema);

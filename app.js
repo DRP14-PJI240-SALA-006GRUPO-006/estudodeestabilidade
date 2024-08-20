@@ -32,11 +32,15 @@ app.get('/studies', (req, res) => {
     res.sendFile(path.join(__dirname, 'views','studies.html'));
 });
 app.get('/studies/create', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views','create-study.html'));
+    res.sendFile(path.join(__dirname, 'views','create.html'));
 });
 app.get('/studies/:id', (req, res) => {
     res.sendFile(path.join(__dirname, 'views','view.html'));
 });
+
+//rotas de suporte suporte para vieww
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.listen(PORT, () => {
     console.log(`\nServidor iniciado com sucesso!\n`)

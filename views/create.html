@@ -27,7 +27,7 @@
         <input type="text" id="code" name="code" required>
         <br>
         <label for="batch">Batch:</label>
-        <input type="text" id="batch" name="batch" required>
+        <input type="text" id="batch" name="lot" required>
         <br>
         <label for="startDate">Start Date:</label>
         <input type="date" id="startDate" name="startDate" required>
@@ -51,63 +51,22 @@
         <label for="density">Density:</label>
         <input type="text" id="density" name="day0[density]" required>
         <br>
+        <label for="responsible">Responsible:</label>
+        <input type="text" id="responsible" name="responsible" required>
+        <br>
+        <label for="approved">Approved:</label>
+        <input type="checkbox" id="approved" name="approved">
+        <br>
+        <h3>Comments</h3>
+        <label for="commentText">Comment:</label>
+        <textarea id="commentText" name="comment[text]"></textarea>
+        <br>
+        <label for="commentCreatedBy">Created By:</label>
+        <input type="text" id="commentCreatedBy" name="comment[createdBy]">
+        <br>
         <button type="submit">Create Study</button>
     </form>
 
-    <script>
-        document.getElementById('create-study-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
-            data.day0 = {
-                aspect: formData.get('day0[aspect]'),
-                color: formData.get('day0[color]'),
-                odor: formData.get('day0[odor]'),
-                viscosity: formData.get('day0[viscosity]'),
-                ph: formData.get('day0[ph]'),
-                density: formData.get('day0[density]')
-            };
-
-            const token = sessionStorage.getItem('token');
-            if (!token) {
-                alert('Você precisa estar logado para criar um estudo.');
-                window.location.href = '/login';
-                return;
-            }
-
-            const response = await fetch('/api/studies', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-auth-token': `${token}`
-                },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                alert('Estudo criado com sucesso!');
-                window.location.href = '/studies';
-            } else {
-                alert('Falha ao criar o estudo: ' + result.msg);
-            }
-        });
-
-        // Função para verificar a expiração do token
-        function checkTokenExpiration() {
-            const expirationTime = sessionStorage.getItem('tokenExpiration');
-            if (expirationTime && new Date().getTime() > expirationTime) {
-                // Remove o token se expirado
-                sessionStorage.removeItem('token');
-                sessionStorage.removeItem('tokenExpiration');
-                alert('Sua sessão expirou. Por favor, faça login novamente.');
-                window.location.href = '/login';
-            }
-        }
-
-        // Verifica a expiração do token ao carregar a página
-        window.onload = checkTokenExpiration;
-    </script>
+    <script src="/js/create.js"></script>
 </body>
 </html>

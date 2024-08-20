@@ -9,18 +9,6 @@
     <h1>Studies</h1>
     <a href="/studies/create">Create New Study</a>
     <ul id="studies-list"></ul>
-    <script>
-        async function loadStudies() {
-            const response = await fetch('/api/studies');
-            const studies = await response.json();
-            const studiesList = document.getElementById('studies-list');
-            studies.forEach(study => {
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="/studies/${study._id}">${study.projectName}</a>`;
-                studiesList.appendChild(li);
-            });
-        }
-        loadStudies();
-    </script>
+    <script src="/js/studies.js"></script>
 </body>
 </html>
