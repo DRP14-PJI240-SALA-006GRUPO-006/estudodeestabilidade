@@ -26,7 +26,6 @@ O projeto adotará uma arquitetura baseada em Model-View-Controller (MVC), com a
 
 - **HTML/CSS:** Para a estrutura e estilo das páginas.
 - **JavaScript:** Para interatividade e manipulação de DOM.
-- **Frameworks/Libraries:** Pode-se utilizar frameworks como React ou Vue.js para um desenvolvimento mais dinâmico e eficiente da interface, se necessário.
 
 ### 3.2 Back-end
 
