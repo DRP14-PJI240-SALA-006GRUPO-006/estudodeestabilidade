@@ -2,6 +2,7 @@ async function loadStudy() {
     const studyId = window.location.pathname.split('/').pop();
     const response = await fetch(`/api/studies/${studyId}`);
     const study = await response.json();
+    console.log(study)
 
     document.getElementById('product').textContent = study.product;
     document.getElementById('lot').textContent = study.lot;
@@ -27,6 +28,7 @@ async function loadStudy() {
         });
         thead.appendChild(headerRow);
         table.appendChild(thead);
+        
 
         // Corpo da Tabela
         const tbody = document.createElement('tbody');
@@ -77,7 +79,7 @@ async function loadStudy() {
             viscosity: day0Data.viscosity
         };
     });
-    createTable('Leitura Inicial', [initialData]);
+    createTable('Estudo Inicial', initialData);
 
     // Luz Solar
     const luzData = Object.keys(study.conditions.luz).filter(day => day !== 'day0').map(day => ({

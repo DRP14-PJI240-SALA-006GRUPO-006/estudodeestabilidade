@@ -1,1 +1,6 @@
-console.log('Hello World');
+function checkTokenExpiration() {
+
+    window.location.href = '/studies'
+}
+
+window.onload = checkTokenExpiration
