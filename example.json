@@ -1,0 +1,306 @@
+{
+    "_id": {
+        "$oid": "66c4a98788268a4b061c18fd"
+    },
+    "product": "Produto A",
+    "lot": "Lote C",
+    "nature": "Estudo 1",
+    "startDate": {
+        "$date": {
+            "$numberLong": "1721260800000"
+        }
+    },
+    "conditions": {
+        "estufa": {
+            "day0": {
+                "aspect": "Aspecto Inicial",
+                "color": "Cor Inicial",
+                "odor": "Odor Inicial",
+                "pH": "PH Inicial",
+                "viscosity": "Viscosidade Inicial",
+                "_id": {
+                    "$oid": "66c4a98788268a4b061c18fe"
+                }
+            },
+            "day7": {
+                "aspect": "Novo Aspecto Estufa",
+                "color": "Nova Cor Estufa",
+                "odor": "Novo Odor Estufa",
+                "viscosity": "Nova Viscosidade Estufa",
+                "_id": {
+                    "$oid": "66c4ddeb7b1a711bb3dbf79d"
+                },
+                "pH": "Novo PH Estufa"
+            },
+            "day15": {
+                "aspect": "Novo Aspecto Estufa",
+                "color": "Nova Cor Estufa",
+                "odor": "Novo Odor Estufa",
+                "viscosity": "Nova Viscosidade Estufa",
+                "_id": {
+                    "$oid": "66c4ddfa7b1a711bb3dbf7a3"
+                },
+                "pH": "Novo PH Estufa"
+            },
+            "day30": {
+                "aspect": "Novo Aspecto Estufa",
+                "color": "Nova Cor Estufa",
+                "odor": "Novo Odor Estufa",
+                "viscosity": "Nova Viscosidade Estufa",
+                "_id": {
+                    "$oid": "66c4de2f7b1a711bb3dbf7a9"
+                },
+                "pH": "Novo PH Estufa"
+            },
+            "day60": {
+                "aspect": "Novo Aspecto Estufa",
+                "color": "Nova Cor Estufa",
+                "odor": "Novo Odor Estufa",
+                "viscosity": "Nova Viscosidade Estufa",
+                "_id": {
+                    "$oid": "66c4de3e7b1a711bb3dbf7af"
+                },
+                "pH": "Novo PH Estufa"
+            },
+            "day90": {
+                "aspect": "Novo Aspecto Estufa",
+                "color": "Nova Cor Estufa",
+                "odor": "Novo Odor Estufa",
+                "viscosity": "Nova Viscosidade Estufa",
+                "_id": {
+                    "$oid": "66c4de557b1a711bb3dbf7b5"
+                },
+                "pH": "TESTE"
+            }
+        },
+        "luz": {
+            "day0": {
+                "aspect": "Aspecto Inicial",
+                "color": "Cor Inicial",
+                "odor": "Odor Inicial",
+                "pH": "PH Inicial",
+                "viscosity": "Viscosidade Inicial",
+                "_id": {
+                    "$oid": "66c4a98788268a4b061c18ff"
+                }
+            },
+            "day7": {
+                "aspect": "Novo Aspecto Luz",
+                "color": "Nova Cor Luz",
+                "odor": "Novo Odor Luz",
+                "viscosity": "Nova Viscosidade Luz",
+                "_id": {
+                    "$oid": "66c4ddeb7b1a711bb3dbf79e"
+                },
+                "pH": "Novo PH Luz"
+            },
+            "day15": {
+                "aspect": "Novo Aspecto Luz",
+                "color": "Nova Cor Luz",
+                "odor": "Novo Odor Luz",
+                "viscosity": "Nova Viscosidade Luz",
+                "_id": {
+                    "$oid": "66c4ddfa7b1a711bb3dbf7a4"
+                },
+                "pH": "Novo PH Luz"
+            },
+            "day30": {
+                "aspect": "Novo Aspecto Luz",
+                "color": "Nova Cor Luz",
+                "odor": "Novo Odor Luz",
+                "viscosity": "Nova Viscosidade Luz",
+                "_id": {
+                    "$oid": "66c4de2f7b1a711bb3dbf7aa"
+                },
+                "pH": "Novo PH Luz"
+            },
+            "day60": {
+                "aspect": "Novo Aspecto Luz",
+                "color": "Nova Cor Luz",
+                "odor": "Novo Odor Luz",
+                "viscosity": "Nova Viscosidade Luz",
+                "_id": {
+                    "$oid": "66c4de3e7b1a711bb3dbf7b0"
+                },
+                "pH": "Novo PH Luz"
+            },
+            "day90": {
+                "aspect": "Novo Aspecto Luz",
+                "color": "Nova Cor Luz",
+                "odor": "Novo Odor Luz",
+                "viscosity": "Nova Viscosidade Luz",
+                "_id": {
+                    "$oid": "66c4de557b1a711bb3dbf7b6"
+                },
+                "pH": "Novo PH Luz"
+            }
+        },
+        "armario": {
+            "day0": {
+                "aspect": "Aspecto Inicial",
+                "color": "Cor Inicial",
+                "odor": "Odor Inicial",
+                "pH": "PH Inicial",
+                "viscosity": "Viscosidade Inicial",
+                "_id": {
+                    "$oid": "66c4a98788268a4b061c1900"
+                }
+            },
+            "day7": {
+                "aspect": "Novo Aspecto Armario",
+                "color": "Nova Cor Armario",
+                "odor": "Novo Odor Armario",
+                "viscosity": "Nova Viscosidade Armario",
+                "_id": {
+                    "$oid": "66c4ddeb7b1a711bb3dbf79f"
+                },
+                "pH": "Novo PH Armario"
+            },
+            "day15": {
+                "aspect": "Novo Aspecto Armario",
+                "color": "Nova Cor Armario",
+                "odor": "Novo Odor Armario",
+                "viscosity": "Nova Viscosidade Armario",
+                "_id": {
+                    "$oid": "66c4ddfa7b1a711bb3dbf7a5"
+                },
+                "pH": "Novo PH Armario"
+            },
+            "day30": {
+                "aspect": "Novo Aspecto Armario",
+                "color": "Nova Cor Armario",
+                "odor": "Novo Odor Armario",
+                "viscosity": "Nova Viscosidade Armario",
+                "_id": {
+                    "$oid": "66c4de2f7b1a711bb3dbf7ab"
+                },
+                "pH": "Novo PH Armario"
+            },
+            "day60": {
+                "aspect": "Novo Aspecto Armario",
+                "color": "Nova Cor Armario",
+                "odor": "Novo Odor Armario",
+                "viscosity": "Nova Viscosidade Armario",
+                "_id": {
+                    "$oid": "66c4de3e7b1a711bb3dbf7b1"
+                },
+                "pH": "Novo PH Armario"
+            },
+            "day90": {
+                "aspect": "Novo Aspecto Armario",
+                "color": "Nova Cor Armario",
+                "odor": "Novo Odor Armario",
+                "viscosity": "Nova Viscosidade Armario",
+                "_id": {
+                    "$oid": "66c4de557b1a711bb3dbf7b7"
+                },
+                "pH": "Novo PH Armario"
+            }
+        },
+        "geladeira": {
+            "day0": {
+                "aspect": "Aspecto Inicial",
+                "color": "Cor Inicial",
+                "odor": "Odor Inicial",
+                "pH": "PH Inicial",
+                "viscosity": "Viscosidade Inicial",
+                "_id": {
+                    "$oid": "66c4a98788268a4b061c1901"
+                }
+            },
+            "day7": {
+                "aspect": "Novo Aspecto Geladeira - day 15",
+                "color": "Nova Cor Geladeira - day 15",
+                "odor": "Novo Odor Geladeira - day 15",
+                "viscosity": "Nova Viscosidade Geladeira - - day 15",
+                "_id": {
+                    "$oid": "66c4ddeb7b1a711bb3dbf7a0"
+                },
+                "pH": "Novo PH Geladeira - day 15"
+            },
+            "day15": {
+                "aspect": "Novo Aspecto Geladeira - day 15",
+                "color": "Nova Cor Geladeira - day 15",
+                "odor": "Novo Odor Geladeira - day 15",
+                "viscosity": "Nova Viscosidade Geladeira - - day 15",
+                "_id": {
+                    "$oid": "66c4ddfa7b1a711bb3dbf7a6"
+                },
+                "pH": "Novo PH Geladeira - day 15"
+            },
+            "day30": {
+                "aspect": "Novo Aspecto Geladeira - day 15",
+                "color": "Nova Cor Geladeira - day 15",
+                "odor": "Novo Odor Geladeira - day 15",
+                "viscosity": "Nova Viscosidade Geladeira - - day 15",
+                "_id": {
+                    "$oid": "66c4de2f7b1a711bb3dbf7ac"
+                },
+                "pH": "Novo PH Geladeira - day 15"
+            },
+            "day60": {
+                "aspect": "Novo Aspecto Geladeira - day 15",
+                "color": "Nova Cor Geladeira - day 15",
+                "odor": "Novo Odor Geladeira - day 15",
+                "viscosity": "Nova Viscosidade Geladeira - - day 15",
+                "_id": {
+                    "$oid": "66c4de3e7b1a711bb3dbf7b2"
+                },
+                "pH": "Novo PH Geladeira - day 15"
+            },
+            "day90": {
+                "aspect": "Novo Aspecto Geladeira - day 15",
+                "color": "Nova Cor Geladeira - day 15",
+                "odor": "Novo Odor Geladeira - day 15",
+                "viscosity": "Nova Viscosidade Geladeira - - day 15",
+                "_id": {
+                    "$oid": "66c4de557b1a711bb3dbf7b8"
+                },
+                "pH": "Novo PH Geladeira - day 15"
+            }
+        }
+    },
+    "projectNumber": {
+        "$numberInt": "2"
+    },
+    "__v": {
+        "$numberInt": "0"
+    },
+    "comments": {
+        "comment": {
+            "comment": "comentario 1",
+            "_id": {
+                "$oid": "66c4e424cb083faa7440d751"
+            },
+            "date": {
+                "$date": {
+                    "$numberLong": "1724179492515"
+                }
+            }
+        },
+        "comment-1724179550632": {
+            "comment": "comentario 2",
+            "_id": {
+                "$oid": "66c4e45e2f9bd73e0fb3d360"
+            },
+            "date": {
+                "$date": {
+                    "$numberLong": "1724179550636"
+                }
+            }
+        },
+        "comment-1724179578358": {
+            "comment": "comentario 3",
+            "_id": {
+                "$oid": "66c4e47a2f9bd73e0fb3d363"
+            },
+            "date": {
+                "$date": {
+                    "$numberLong": "1724179578358"
+                }
+            }
+        }
+    },
+    "approved": true,
+    "responsible": "Marcos Cassiano"
+}
