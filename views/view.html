@@ -1,18 +1,240 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/view.css">
     <title>Estudo de Estabilidade</title>
 </head>
+
 <body>
-    <h1>ESTUDO DE ESTABILIDADE</h1>
-    <p><strong>Produto:</strong> <span id="product"></span></p>
-    <p><strong>Lote:</strong> <span id="lot"></span></p>
-    <p><strong>Natureza:</strong> <span id="nature"></span></p>
-    <div id="conditionsTables"></div>
+    <div class="stabilitystudies">
+        <h1>ESTUDO DE ESTABILIDADE</h1>
+        <p><strong>Produto:</strong> <span id="product"></span></p>
+        <p><strong>Lote:</strong> <span id="lot"></span></p>
+        <p><strong>Natureza:</strong> <span id="nature"></span></p>
+
+        <div>
+            <div class="leituraInicial">Leitura Inicial</div>
+            <section class="initialReading grid-inital-reading">
+                <div class="item Data">Data</div>
+                <div class="item DataValue"><span id="startDate"></span></div>
+                <div class="item Aspecto">Aspecto</div>
+                <div class="item AspectoValue"><span id="aspect"></span></div>
+                <div class="item Cor">Cor</div>
+                <div class="item CorValue"><span id="color"></span></div>
+                <div class="item Odor">Odor</div>
+                <div class="item OdorValue"><span id="odor"></span></div>
+                <div class="item pH">pH</div>
+                <div class="item pHValue"><span id="pH"></span></div>
+                <div class="item Viscosidade">Viscosidade</div>
+                <div class="item ViscosidadeValue"><span id="viscosity"></span></div>
+            </section>
+        </div>
+        <div>
+            <div class="legenda">Legenda</div>
+            <section class="legendaGrid grid-legenda">
+                <div class="item IN">IN</div>
+                <div class="item inalterado">INALTERADO</div>
+                <div class="item LA">LA</div>
+                <div class="item levementeAlterado">LEVEMENTE ALTERADO</div>
+                <div class="item A">A</div>
+                <div class="item alteracao">ALTERAÇÃO</div>
+            </section>
+        </div>
+        <div>
+            <div class="luzSolarTitle">Luz Solar</div>
+            <div class="grid-luz-solar">
+                <div class="item leitura">Leitura</div>
+                <div class="item seteDias">7 dias</div>
+                <div class="item quinzeDias">15 dias</div>
+                <div class="item trintaDias">30 dias</div>
+                <div class="item sessentaDias">60 dias</div>
+                <div class="item noventaDias">90 dias</div>
+                <div class="item dataLuzSolar">Data</div>
+                <div class="item dataLuzSolarValueSeteDias">01/08/2024</div>
+                <div class="item dataLuzSolarValueQuinzeDias">01/08/2024</div>
+                <div class="item dataLuzSolarValueTrintaDias">01/08/2024</div>
+                <div class="item dataLuzSolarValueSessentaDias">01/08/2024</div>
+                <div class="item dataLuzSolarValuenoventaDias">01/08/2024</div>
+                <div class="item aspectoLuzSolar">Aspecto</div>
+                <div class="item aspectoLuzSolarValueSeteDias">Liquido Viscoso</div>
+                <div class="item aspectoLuzSolarValueQuinzeDias">Liquido Viscoso</div>
+                <div class="item aspectoLuzSolarValueTrintaDias">Liquido Viscoso</div>
+                <div class="item aspectoLuzSolarValueSessentaDias">Liquido Viscoso</div>
+                <div class="item aspectoLuzSolarValueNoventaDias">Liquido Viscoso</div>
+                <div class="item corLuzSolar">Cor</div>
+                <div class="item corLuzSolarValueSeteDias">Vermelho Translucido</div>
+                <div class="item corLuzSolarValueQuinzeDias">Vermelho Translucido</div>
+                <div class="item corLuzSolarValueTrintaDias">Vermelho Translucido</div>
+                <div class="item corLuzSolarValueSessentaDias">Vermelho Translucido</div>
+                <div class="item corLuzSolarValueNoventaDias">Vermelho Translucido</div>
+                <div class="item odorLuzSolar">Odor</div>
+                <div class="item odorLuzSolarValueSeteDias">Perfumado Conforme Padrao</div>
+                <div class="item odorLuzSolarValueQuinzeDias">Perfumado Conforme Padrao</div>
+                <div class="item odorLuzSolarValueTrintaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorLuzSolarValueSessentaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorLuzSolarValueNoventaDias">Perfumado Conforme Padrao</div>
+                <div class="item pHLuzSolar">pH</div>
+                <div class="item pHLuzSolarValueSeteDias">5,50</div>
+                <div class="item pHLuzSolarValueQuinzeDias">5,50</div>
+                <div class="item pHLuzSolarValueTrintaDias">5,50</div>
+                <div class="item pHLuzSolarValueSessentaDias">5,50</div>
+                <div class="item pHLuzSolarValueNoventaDias">5,50</div>
+                <div class="item viscosidadeLuzSolar">Viscosidade</div>
+                <div class="item viscosidadeLuzSolarValueSeteDias">2500 cP</div>
+                <div class="item viscosidadeLuzSolarValueQuinzeDias">2500 cP</div>
+                <div class="item viscosidadeLuzSolarValueTrintaDias">2500 cP</div>
+                <div class="item viscosidadeLuzSolarValueSessentaDias">2500 cP</div>
+                <div class="item viscosidadeLuzSolarValueNoventaDias">2500 cP</div>
+            </div>
+        </div>
+        <div>
+            <div class="escuroTitle">Escuro</div>
+            <div class="grid-escuro">
+                <div class="item leitura">Leitura</div>
+                <div class="item seteDias">7 dias</div>
+                <div class="item quinzeDias">15 dias</div>
+                <div class="item trintaDias">30 dias</div>
+                <div class="item sessentaDias">60 dias</div>
+                <div class="item noventaDias">90 dias</div>
+                <div class="item dataEscuro">Data</div>
+                <div class="item dataEscuroValueSeteDias">01/08/2024</div>
+                <div class="item dataEscuroValueQuinzeDias">01/08/2024</div>
+                <div class="item dataEscuroValueTrintaDias">01/08/2024</div>
+                <div class="item dataEscuroValueSessentaDias">01/08/2024</div>
+                <div class="item dataEscuroValueNoventaDias">01/08/2024</div>
+                <div class="item aspectoEscuro">Aspecto</div>
+                <div class="item aspectoEscuroValueSeteDias">Liquido Viscoso</div>
+                <div class="item aspectoEscuroValueQuinzeDias">Liquido Viscoso</div>
+                <div class="item aspectoEscuroValueTrintaDias">Liquido Viscoso</div>
+                <div class="item aspectoEscuroValueSessentaDias">Liquido Viscoso</div>
+                <div class="item aspectoEscuroValueNoventaDias">Liquido Viscoso</div>
+                <div class="item corEscuro">Cor</div>
+                <div class="item corEscuroValueSeteDias">Vermelho Translucido</div>
+                <div class="item corEscuroValueQuinzeDias">Vermelho Translucido</div>
+                <div class="item corEscuroValueTrintaDias">Vermelho Translucido</div>
+                <div class="item corEscuroValueSessentaDias">Vermelho Translucido</div>
+                <div class="item corEscuroValueNoventaDias">Vermelho Translucido</div>
+                <div class="item odorEscuro">Odor</div>
+                <div class="item odorEscuroValueSeteDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEscuroValueQuinzeDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEscuroValueTrintaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEscuroValueSessentaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEscuroValueNoventaDias">Perfumado Conforme Padrao</div>
+                <div class="item pHEscuro">pH</div>
+                <div class="item pHEscuroValueSeteDias">5,50</div>
+                <div class="item pHEscuroValueQuinzeDias">5,50</div>
+                <div class="item pHEscuroValueTrintaDias">5,50</div>
+                <div class="item pHEscuroValueSessentaDias">5,50</div>
+                <div class="item pHEscuroValueNoventaDias">5,50</div>
+                <div class="item viscosidadeEscuro">Viscosidade</div>
+                <div class="item viscosidadeEscuroValueSeteDias">2500 cP</div>
+                <div class="item viscosidadeEscuroValueQuinzeDias">2500 cP</div>
+                <div class="item viscosidadeEscuroValueTrintaDias">2500 cP</div>
+                <div class="item viscosidadeEscuroValueSessentaDias">2500 cP</div>
+                <div class="item viscosidadeEscuroValueNoventaDias">2500 cP</div>
+            </div>
+        </div>
+        <div>
+            <div class="geladeiraTitle">Geladeira</div>
+            <div class="grid-geladeira">
+                <div class="item leitura">Leitura</div>
+                <div class="item seteDias">7 dias</div>
+                <div class="item quinzeDias">15 dias</div>
+                <div class="item trintaDias">30 dias</div>
+                <div class="item sessentaDias">60 dias</div>
+                <div class="item noventaDias">90 dias</div>
+                <div class="item dataGeladeira">Data</div>
+                <div class="item dataGeladeiraValueSeteDias">01/08/2024</div>
+                <div class="item dataGeladeiraValueQuinzeDias">01/08/2024</div>
+                <div class="item dataGeladeiraValueTrintaDias">01/08/2024</div>
+                <div class="item dataGeladeiraValueSessentaDias">01/08/2024</div>
+                <div class="item dataGeladeiraValueNoventaDias">01/08/2024</div>
+                <div class="item aspectoGeladeira">Aspecto</div>
+                <div class="item aspectoGeladeiraValueSeteDias">Liquido Viscoso</div>
+                <div class="item aspectoGeladeiraValueQuinzeDias">Liquido Viscoso</div>
+                <div class="item aspectoGeladeiraValueTrintaDias">Liquido Viscoso</div>
+                <div class="item aspectoGeladeiraValueSessentaDias">Liquido Viscoso</div>
+                <div class="item aspectoGeladeiraValueNoventaDias">Liquido Viscoso</div>
+                <div class="item corGeladeira">Cor</div>
+                <div class="item corGeladeiraValueSeteDias">Vermelho Translucido</div>
+                <div class="item corGeladeiraValueQuinzeDias">Vermelho Translucido</div>
+                <div class="item corGeladeiraValueTrintaDias">Vermelho Translucido</div>
+                <div class="item corGeladeiraValueSessentaDias">Vermelho Translucido</div>
+                <div class="item corGeladeiraValueNoventaDias">Vermelho Translucido</div>
+                <div class="item odorGeladeira">Odor</div>
+                <div class="item odorGeladeiraValueSeteDias">Perfumado Conforme Padrao</div>
+                <div class="item odorGeladeiraValueQuinzeDias">Perfumado Conforme Padrao</div>
+                <div class="item odorGeladeiraValueTrintaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorGeladeiraValueSessentaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorGeladeiraValueNoventaDias">Perfumado Conforme Padrao</div>
+                <div class="item pHGeladeira">pH</div>
+                <div class="item pHGeladeiraValueSeteDias">5,50</div>
+                <div class="item pHGeladeiraValueQuinzeDias">5,50</div>
+                <div class="item pHGeladeiraValueTrintaDias">5,50</div>
+                <div class="item pHGeladeiraValueSessentaDias">5,50</div>
+                <div class="item pHGeladeiraValueNoventaDias">5,50</div>
+                <div class="item viscosidadeGeladeira">Viscosidade</div>
+                <div class="item viscosidadeGeladeiraValueSeteDias">2500 cP</div>
+                <div class="item viscosidadeGeladeiraValueQuinzeDias">2500 cP</div>
+                <div class="item viscosidadeGeladeiraValueTrintaDias">2500 cP</div>
+                <div class="item viscosidadeGeladeiraValueSessentaDias">2500 cP</div>
+                <div class="item viscosidadeGeladeiraValueNoventaDias">2500 cP</div>
+            </div>
+        </div>
+        <div>
+            <div class="estufaTitle">Estufa</div>
+            <div class="grid-estufa">
+                <div class="item leitura">Leitura</div>
+                <div class="item seteDias">7 dias</div>
+                <div class="item quinzeDias">15 dias</div>
+                <div class="item trintaDias">30 dias</div>
+                <div class="item sessentaDias">60 dias</div>
+                <div class="item noventaDias">90 dias</div>
+                <div class="item dataEstufa">Data</div>
+                <div class="item dataEstufaValueSeteDias">01/08/2024</div>
+                <div class="item dataEstufaValueQuinzeDias">01/08/2024</div>
+                <div class="item dataEstufaValueTrintaDias">01/08/2024</div>
+                <div class="item dataEstufaValueSessentaDias">01/08/2024</div>
+                <div class="item dataEstufaValueNoventaDias">01/08/2024</div>
+                <div class="item aspectoEstufa">Aspecto</div>
+                <div class="item aspectoEstufaValueSeteDias">Liquido Viscoso</div>
+                <div class="item aspectoEstufaValueQuinzeDias">Liquido Viscoso</div>
+                <div class="item aspectoEstufaValueTrintaDias">Liquido Viscoso</div>
+                <div class="item aspectoEstufaValueSessentaDias">Liquido Viscoso</div>
+                <div class="item aspectoEstufaValueNoventaDias">Liquido Viscoso</div>
+                <div class="item corEstufa">Cor</div>
+                <div class="item corEstufaValueSeteDias">Vermelho Translucido</div>
+                <div class="item corEstufaValueQuinzeDias">Vermelho Translucido</div>
+                <div class="item corEstufaValueTrintaDias">Vermelho Translucido</div>
+                <div class="item corEstufaValueSessentaDias">Vermelho Translucido</div>
+                <div class="item corEstufaValueNoventaDias">Vermelho Translucido</div>
+                <div class="item odorEstufa">Odor</div>
+                <div class="item odorEstufaValueSeteDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEstufaValueQuinzeDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEstufaValueTrintaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEstufaValueSessentaDias">Perfumado Conforme Padrao</div>
+                <div class="item odorEstufaValueNoventaDias">Perfumado Conforme Padrao</div>
+                <div class="item pHEstufa">pH</div>
+                <div class="item pHEstufaValueSeteDias">5,50</div>
+                <div class="item pHEstufaValueQuinzeDias">5,50</div>
+                <div class="item pHEstufaValueTrintaDias">5,50</div>
+                <div class="item pHEstufaValueSessentaDias">5,50</div>
+                <div class="item pHEstufaValueNoventaDias">5,50</div>
+                <div class="item viscosidadeEstufa">Viscosidade</div>
+                <div class="item viscosidadeEstufaValueSeteDias">2500 cP</div>
+                <div class="item viscosidadeEstufaValueQuinzeDias">2500 cP</div>
+                <div class="item viscosidadeEstufaValueTrintaDias">2500 cP</div>
+                <div class="item viscosidadeEstufaValueSessentaDias">2500 cP</div>
+                <div class="item viscosidadeEstufaValueNoventaDias">2500 cP</div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="/js/view.js"></script>
 </body>
+
 </html>

@@ -1,25 +1,227 @@
 body {
     font-family: Arial, sans-serif;
 }
+
 h1 {
     text-align: center;
 }
+
 .info {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-table, th, td {
+
+table,
+th,
+td {
     border: 1px solid black;
 }
-th, td {
+
+th,
+td {
     padding: 10px;
     text-align: left;
 }
+
 th {
     background-color: #f2f2f2;
+}
+
+/*Tabela Leitura inicial*/
+.initialReading {
+    display: grid;
+}
+
+.grid-inital-reading {
+    grid-template-areas:
+        "Data DataValue"
+        "Aspecto AspectoValue"
+        "Cor CorValue"
+        "Odor OdorValue"
+        "pH pHValue"
+        "Viscosidade ViscosidadeValue"
+    ;
+}
+
+/*Tabela Legenda*/
+.legendaGrid {
+    display: grid;
+}
+
+.grid-legenda {
+    grid-template-areas: 
+    "IN inalterado"
+    "LA levementeAlterado"
+    "A alteracao"
+    ;
+}
+
+/*Tabela Luz Solar*/
+.luzSolarTitle {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.grid-luz-solar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.grid-luz-solar > div {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.grid-luz-solar .leitura,
+.grid-luz-solar .seteDias,
+.grid-luz-solar .quinzeDias,
+.grid-luz-solar .trintaDias,
+.grid-luz-solar .sessentaDias,
+.grid-luz-solar .noventaDias {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.grid-luz-solar .dataLuzSolar,
+.grid-luz-solar .aspectoLuzSolar,
+.grid-luz-solar .corLuzSolar,
+.grid-luz-solar .odorLuzSolar,
+.grid-luz-solar .pHLuzSolar,
+.grid-luz-solar .viscosidadeLuzSolar {
+    font-weight: bold;
+    background-color: #e0e0e0;
+}
+
+/*Tabela Escuro*/
+.escuroTitle {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.grid-escuro {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.grid-escuro > div {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.grid-escuro .leitura,
+.grid-escuro .seteDias,
+.grid-escuro .quinzeDias,
+.grid-escuro .trintaDias,
+.grid-escuro .sessentaDias,
+.grid-escuro .noventaDias {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.grid-escuro .dataEscuro,
+.grid-escuro .aspectoEscuro,
+.grid-escuro .corEscuro,
+.grid-escuro .odorEscuro,
+.grid-escuro .pHEscuro,
+.grid-escuro .viscosidadeEscuro {
+    font-weight: bold;
+    background-color: #d0d0d0;
+}
+
+/*Tabela Geladeira*/
+.geladeiraTitle {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.grid-geladeira {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.grid-geladeira > div {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.grid-geladeira .leitura,
+.grid-geladeira .seteDias,
+.grid-geladeira .quinzeDias,
+.grid-geladeira .trintaDias,
+.grid-geladeira .sessentaDias,
+.grid-geladeira .noventaDias {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.grid-geladeira .dataGeladeira,
+.grid-geladeira .aspectoGeladeira,
+.grid-geladeira .corGeladeira,
+.grid-geladeira .odorGeladeira,
+.grid-geladeira .pHGeladeira,
+.grid-geladeira .viscosidadeGeladeira {
+    font-weight: bold;
+    background-color: #c0c0c0;
+}
+
+/*Tabela Estufa*/
+.estufaTitle {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.grid-estufa {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.grid-estufa > div {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.grid-estufa .leitura,
+.grid-estufa .seteDias,
+.grid-estufa .quinzeDias,
+.grid-estufa .trintaDias,
+.grid-estufa .sessentaDias,
+.grid-estufa .noventaDias {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.grid-estufa .dataEstufa,
+.grid-estufa .aspectoEstufa,
+.grid-estufa .corEstufa,
+.grid-estufa .odorEstufa,
+.grid-estufa .pHEstufa,
+.grid-estufa .viscosidadeEstufa {
+    font-weight: bold;
+    background-color: #b0b0b0;
 }
