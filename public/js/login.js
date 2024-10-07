@@ -1,3 +1,8 @@
+//bug
+//nao esta entrando primeiro na tela de login
+//acesso aos estudos sem estar autenticado
+//se nao estiver autenticado ter que ser forcado a vir para tela de login
+
 document.getElementById('login-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const email = document.getElementById('email').value;
