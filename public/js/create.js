@@ -2,48 +2,86 @@ document.getElementById('create-study-form').addEventListener('submit', async fu
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-    data.day0 = {
-        aspect: formData.get('day0[aspect]'),
-        color: formData.get('day0[color]'),
-        odor: formData.get('day0[odor]'),
-        viscosity: formData.get('day0[viscosity]'),
-        ph: formData.get('day0[ph]'),
-        density: formData.get('day0[density]')
+    const initialConditions = {
+        aspect: formData.get('initialConditions[aspect]'),
+        color: formData.get('initialConditions[color]'),
+        odor: formData.get('initialConditions[odor]'),
+        pH: formData.get('initialConditions[pH]'),
+        viscosity: formData.get('initialConditions[viscosity]')
     };
 
-    // Tratamento de campos booleanos e comentários
-    data.approved = formData.get('approved') ? true : false;
+    // Criar uma condição vazia para os outros dias
+    const emptyCondition = {
+        aspect: ' ',
+        color: ' ',
+        odor: ' ',
+        pH: ' ',
+        viscosity: ' '
+    };
 
-    const commentText = formData.get('comment[text]');
-    const commentCreatedBy = formData.get('comment[createdBy]');
-    if (commentText && commentCreatedBy) {
-        data.comments = [{ text: commentText, createdBy: commentCreatedBy }];
+    // Lista de todos os dias que precisamos
+    const days = ['day0', 'day7', 'day15', 'day30', 'day60', 'day90'];
+    
+    // Criar a estrutura de condições para cada ambiente
+    const createConditions = () => {
+        const conditions = {};
+        days.forEach(day => {
+            conditions[day] = day === 'day0' ? {...initialConditions} : {...emptyCondition};
+        });
+        return conditions;
+    };
+
+    const data = {
+        product: formData.get('product'),
+        lot: formData.get('lot'),
+        nature: formData.get('nature'),
+        startDate: formData.get('startDate'),
+        responsible: formData.get('responsible'),
+        approved: formData.get('approved') ? true : false,
+        conditions: {
+            estufa: createConditions(),
+            luz: createConditions(),
+            escuro: createConditions(),
+            geladeira: createConditions()
+        }
+    };
+
+    const commentText = formData.get('comment');
+    if (commentText) {
+        data.comments = new Map();
+        data.comments.set('initial', {
+            date: new Date(),
+            comment: commentText
+        });
     }
 
     const token = sessionStorage.getItem('token');
-    console.log(token)
     if (!token) {
         alert('Você precisa estar logado para criar um estudo.');
         window.location.href = '/login';
         return;
     }
 
-    const response = await fetch('/api/studies', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-auth-token': `${token}`
-        },
-        body: JSON.stringify(data)
-    });
+    try {
+        const response = await fetch('/api/studies', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            },
+            body: JSON.stringify(data)
+        });
 
-    const result = await response.json();
-    if (response.ok) {
-        alert('Estudo criado com sucesso!');
-        window.location.href = '/studies';
-    } else {
-        alert('Falha ao criar o estudo: ' + result.msg);
+        const result = await response.json();
+        if (response.ok) {
+            alert('Estudo criado com sucesso!');
+            window.location.href = '/studies';
+        } else {
+            alert('Falha ao criar o estudo: ' + result.msg);
+        }
+    } catch (error) {
+        console.error('Erro ao criar estudo:', error);
+        alert('Erro ao criar estudo. Por favor, tente novamente.');
     }
 });
 
@@ -51,7 +89,6 @@ document.getElementById('create-study-form').addEventListener('submit', async fu
 function checkTokenExpiration() {
     const expirationTime = sessionStorage.getItem('tokenExpiration');
     if (expirationTime && new Date().getTime() > expirationTime) {
-        // Remove o token se expirado
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('tokenExpiration');
         alert('Sua sessão expirou. Por favor, faça login novamente.');
@@ -59,5 +96,4 @@ function checkTokenExpiration() {
     }
 }
 
-// Verifica a expiração do token ao carregar a página
 window.onload = checkTokenExpiration;

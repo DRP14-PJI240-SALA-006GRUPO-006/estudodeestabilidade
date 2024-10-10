@@ -1,6 +1,5 @@
 async function loadStudy() {
     const studyId = window.location.pathname.split('/').pop();
-    console.log(studyId)
     const response = await fetch(`/api/studies/${studyId}`);
     const study = await response.json();
     console.log(study);
@@ -10,6 +9,15 @@ async function loadStudy() {
     document.getElementById('lot').textContent = study.lot;
     document.getElementById('nature').textContent = study.nature;
     document.getElementById('startDate').textContent = new Date(study.startDate).toLocaleDateString();
+    
+    // Preencher os campos da leitura inicial se existirem
+    if (study.conditions && study.conditions.estufa && study.conditions.estufa.day0) {
+        document.getElementById('aspect').textContent = study.conditions.estufa.day0.aspect || '';
+        document.getElementById('color').textContent = study.conditions.estufa.day0.color || '';
+        document.getElementById('odor').textContent = study.conditions.estufa.day0.odor || '';
+        document.getElementById('pH').textContent = study.conditions.estufa.day0.pH || '';
+        document.getElementById('viscosity').textContent = study.conditions.estufa.day0.viscosity || '';
+    }
 
     // Função para criar as tabelas com campos editáveis
     function createTable(title, data, conditionKey) {
@@ -34,9 +42,6 @@ async function loadStudy() {
         table.appendChild(thead);
     
         // Corpo da Tabela com inputs editáveis
-        //BUG
-        //ainda esta bem bugado, nem todos os inputs estao vindo com o id correto
-        //mas por enquanto serve, talvez uma solucao na linha 152
         const tbody = document.createElement('tbody');
         data.forEach(entry => {
             const row = document.createElement('tr');
@@ -72,50 +77,86 @@ async function loadStudy() {
         tableContainer.appendChild(table);
         document.getElementById('conditionsTables').appendChild(tableContainer);
     }
-    
 
-    // Função para criar observações/comentários editáveis
-    function createComments(title, comments) {
+    // Função para criar a seção de comentários
+    function createComments(title, comments = {}) {
         const commentsContainer = document.createElement('div');
+        commentsContainer.id = 'commentsSection';
         const h2 = document.createElement('h2');
         h2.textContent = title;
         commentsContainer.appendChild(h2);
 
-        Object.keys(comments).forEach(commentKey => {
-            const commentObj = comments[commentKey];
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = commentObj.comment;
-            input.name = `comment-${commentKey}-comment`; // Nome único para cada comentário
-            const p = document.createElement('p');
-            p.textContent = `ID: ${commentObj._id}, Date: ${new Date(commentObj.date).toLocaleDateString()}`;
-            commentsContainer.appendChild(p);
-            commentsContainer.appendChild(input);
+        // Criar container para lista de comentários
+        const commentsList = document.createElement('div');
+        commentsList.id = 'commentsList';
+
+        // Adicionar comentários existentes
+        Object.entries(comments).forEach(([commentKey, commentObj]) => {
+            const commentDiv = createCommentElement(commentObj);
+            commentsList.appendChild(commentDiv);
         });
+
+        commentsContainer.appendChild(commentsList);
+
+        // Adicionar botão para novo comentário
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Adicionar Comentário';
+        addButton.type = 'button';
+        addButton.onclick = createNewCommentField;
+        commentsContainer.appendChild(addButton);
 
         document.getElementById('conditionsTables').appendChild(commentsContainer);
     }
 
-    // Função para salvar os dados atualizados
-    //BUG
-    //o codigo esta carregando mais valores que o necessario para realizar o PUT
-    //ao inves de carregar apenas os valores que foram mudados no payload
-    //ele carrega valores que nao foram mudados, mantem os valores corretos entao pode nao ser um problema
-    //pode virar um problema de performance?
-    //se eu mudar mais de um input por vez pode bugar ainda mais?
+    function createCommentElement(commentObj) {
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comment-item';
+        
+        const dateParagraph = document.createElement('p');
+        dateParagraph.textContent = `Data: ${new Date(commentObj.date).toLocaleDateString()}`;
+        commentDiv.appendChild(dateParagraph);
+
+        const commentInput = document.createElement('input');
+        commentInput.type = 'text';
+        commentInput.value = commentObj.comment;
+        commentInput.className = 'existing-comment';
+        commentInput.setAttribute('data-comment-id', commentObj._id);
+        commentDiv.appendChild(commentInput);
+
+        return commentDiv;
+    }
+
+    function createNewCommentField() {
+        const commentsList = document.getElementById('commentsList');
+        const newCommentDiv = document.createElement('div');
+        newCommentDiv.className = 'comment-item';
+
+        const commentInput = document.createElement('input');
+        commentInput.type = 'text';
+        commentInput.placeholder = 'Digite seu comentário aqui';
+        commentInput.className = 'new-comment';
+        
+        newCommentDiv.appendChild(commentInput);
+        commentsList.appendChild(newCommentDiv);
+    }
+
     async function saveData() {
-        const inputs = document.querySelectorAll('input'); // Captura todos os inputs do formulário
-        const updatedConditions = {}; // Estrutura de dados para armazenar as alterações
-    
-        inputs.forEach(input => {
-            const originalValue = input.defaultValue; // Valor original quando a página foi carregada
+        const updatedData = {
+            conditions: {},
+            newComments: [],
+            updatedComments: []
+        };
+
+        // Coletar mudanças nas condições
+        const conditionInputs = document.querySelectorAll('input[id*="."]');
+        conditionInputs.forEach(input => {
+            const originalValue = input.defaultValue;
             const currentValue = input.value;
-    
+
             if (originalValue !== currentValue) {
-                const path = input.id.split('.'); // Divide o id para gerar o caminho no objeto
-                let currentObj = updatedConditions;
-    
-                // Itera sobre as partes do caminho, criando a estrutura conforme necessário
+                const path = input.id.split('.');
+                let currentObj = updatedData.conditions;
+                
                 for (let i = 0; i < path.length - 1; i++) {
                     const key = path[i];
                     if (!currentObj[key]) {
@@ -123,19 +164,41 @@ async function loadStudy() {
                     }
                     currentObj = currentObj[key];
                 }
-    
-                // Define o valor modificado no campo correto
+                
                 currentObj[path[path.length - 1]] = currentValue;
             }
         });
-    
-        // Se não houver alterações, exibe uma mensagem
-        if (Object.keys(updatedConditions).length === 0) {
+
+        // Coletar novos comentários
+        const newComments = document.querySelectorAll('.new-comment');
+        newComments.forEach(input => {
+            if (input.value.trim()) {
+                updatedData.newComments.push({
+                    comment: input.value.trim(),
+                    date: new Date()
+                });
+            }
+        });
+
+        // Coletar comentários existentes modificados
+        const existingComments = document.querySelectorAll('.existing-comment');
+        existingComments.forEach(input => {
+            if (input.value !== input.defaultValue) {
+                updatedData.updatedComments.push({
+                    id: input.getAttribute('data-comment-id'),
+                    comment: input.value
+                });
+            }
+        });
+
+        if (Object.keys(updatedData.conditions).length === 0 && 
+            updatedData.newComments.length === 0 && 
+            updatedData.updatedComments.length === 0) {
             alert('Nenhuma mudança detectada.');
             return;
         }
-    
-        // Enviar os dados modificados no PUT
+
+        // Enviar os dados modificados
         const token = sessionStorage.getItem('token');
         const requestOptions = {
             method: 'PUT',
@@ -143,27 +206,27 @@ async function loadStudy() {
                 'Content-Type': 'application/json',
                 'x-auth-token': `${token}`
             },
-            body: JSON.stringify({ conditions: updatedConditions }), // Envia apenas as condições modificadas
-            redirect: 'follow'
+            body: JSON.stringify(updatedData)
         };
-    
-        const saveResponse = await fetch(`/api/studies/${studyId}`, requestOptions);
-    
-        if (saveResponse.ok) {
-            alert('Dados salvos com sucesso!');
-        } else {
+
+        try {
+            const saveResponse = await fetch(`/api/studies/${studyId}`, requestOptions);
+            if (saveResponse.ok) {
+                alert('Dados salvos com sucesso!');
+                location.reload(); // Recarrega a página para mostrar os novos comentários
+            } else {
+                alert('Erro ao salvar os dados.');
+            }
+        } catch (error) {
+            console.error('Erro ao salvar:', error);
             alert('Erro ao salvar os dados.');
         }
     }
-    
 
     // Mapeia as condições e cria tabelas automaticamente
-    //BUG
-    //talvez mudando o nome das condicoes resolve o problema do mapeamento de id dos inputs
-    //porem talvez seja melhor manter esses nomes e recriar o schema do banco com eles
     const conditions = {
-        'LUZ SOLAR': study.conditions.luz,
-        'ESCURO': study.conditions.armario,
+        'LUZ': study.conditions.luz,
+        'ESCURO': study.conditions.escuro,
         'ESTUFA': study.conditions.estufa,
         'GELADEIRA': study.conditions.geladeira
     };
@@ -184,12 +247,10 @@ async function loadStudy() {
         createTable(conditionTitle, conditionTableData, conditionTitle.toLowerCase().replace(/\s/g, ''));
     }
 
-    // Observações
-    if (study.comments && Object.keys(study.comments).length > 0) {
-        createComments('OBSERVAÇÕES:', study.comments);
-    }
+    // Sempre criar a seção de comentários, mesmo que vazia
+    createComments('OBSERVAÇÕES:', study.comments || {});
 
-    // Adiciona o botão "Salvar" no formulário
+    // Adicionar o botão "Salvar" no formulário
     const saveButton = document.createElement('button');
     saveButton.textContent = 'Salvar';
     saveButton.type = 'button';

@@ -11,7 +11,7 @@ async function loadStudy() {
     // Preencher os dados para os diferentes ambientes (estufa, luz, armário, geladeira)
     fillConditions('.grid-estufa', study.conditions.estufa);
     fillConditions('.grid-luz', study.conditions.luz);
-    fillConditions('.grid-armario', study.conditions.armario);
+    fillConditions('.grid-escuro', study.conditions.escuro);
     fillConditions('.grid-geladeira', study.conditions.geladeira);
 
     // Preencher comentários

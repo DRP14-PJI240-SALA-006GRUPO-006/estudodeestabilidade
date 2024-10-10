@@ -38,7 +38,7 @@ const stabilityStudySchema = new Schema({
             day60: conditionSchema,
             day90: conditionSchema
         },
-        armario: {
+        escuro: {
             day0: conditionSchema,
             day7: conditionSchema,
             day15: conditionSchema,

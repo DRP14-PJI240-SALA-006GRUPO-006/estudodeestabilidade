@@ -1,6 +1,1 @@
-function checkTokenExpiration() {
-
-    window.location.href = '/studies'
-}
-
-window.onload = checkTokenExpiration
+sessionStorage.token ? window.location.href = '/studies' : window.location.href = '/login';

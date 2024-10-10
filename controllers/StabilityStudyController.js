@@ -1,9 +1,17 @@
 const StabilityStudy = require('../models/StabilityStudy');
 const _ = require('lodash');
 
-//POST
 exports.createStudy = async (req, res) => {
-    const { product, lot, nature, startDate, day0 } = req.body;
+    const { 
+        product, 
+        lot, 
+        nature, 
+        startDate, 
+        responsible, 
+        approved,
+        conditions,
+        comments 
+    } = req.body;
 
     try {
         const newStudy = new StabilityStudy({
@@ -11,12 +19,10 @@ exports.createStudy = async (req, res) => {
             lot,
             nature,
             startDate,
-            conditions: {
-                estufa: { day0 },
-                luz:  { day0 },
-                armario:  { day0 },
-                geladeira:  { day0 }
-            }
+            responsible,
+            approved,
+            conditions,
+            comments: comments ? new Map(Object.entries(comments)) : undefined
         });
 
         const study = await newStudy.save();
@@ -55,7 +61,7 @@ exports.getStudyById = async (req, res) => {
 
 //UPDATE
 exports.updateStudy = async (req, res) => {
-    const { conditions, comments, approved, responsible } = req.body;
+    const { conditions, comments, approved, responsible, newComments } = req.body;
 
     try {
         const study = await StabilityStudy.findById(req.params.id);
@@ -63,30 +69,52 @@ exports.updateStudy = async (req, res) => {
             return res.status(404).json({ msg: 'Estudo não encontrado' });
         }
 
-        if (conditions) {
+        // Atualizar condições
+        if (conditions && typeof conditions === 'object') {
             _.merge(study.conditions, conditions);
         }
 
-        if (comments) {
-            for (const [key, value] of Object.entries(comments)) {
-                const uniqueKey = `${key}-${Date.now()}`;
-                study.comments.set(uniqueKey, value);
-            }
+        // Atualizar comentários existentes
+        if (comments && typeof comments === 'object') {
+            Object.entries(comments).forEach(([key, value]) => {
+                if (study.comments.has(key)) {
+                    study.comments.set(key, {
+                        ...study.comments.get(key),
+                        ...value,
+                        updatedAt: new Date()
+                    });
+                }
+            });
         }
 
-        if (approved !== undefined) {
+        // Adicionar novos comentários
+        if (newComments && Array.isArray(newComments)) {
+            newComments.forEach(comment => {
+                const uniqueKey = `comment-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+                study.comments.set(uniqueKey, {
+                    ...comment,
+                    createdAt: new Date()
+                });
+            });
+        }
+
+        // Atualizar approved e responsible
+        if (typeof approved === 'boolean') {
             study.approved = approved;
         }
 
-        if (responsible) {
+        if (responsible && typeof responsible === 'string') {
             study.responsible = responsible;
         }
 
-        await study.save();
-        res.json(study);
+        const updatedStudy = await study.save();
+        res.json(updatedStudy);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Erro no servidor');
+        console.error('Erro ao atualizar estudo:', err);
+        res.status(500).json({
+            error: 'Erro ao atualizar estudo',
+            details: err.message
+        });
     }
 };
 

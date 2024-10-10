@@ -1,72 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Study</title>
+    <title>Create Stability Study</title>
 </head>
 <body>
-    <h1>Create Study</h1>
+    <h1>Create Stability Study</h1>
     <form id="create-study-form">
-        <label for="projectName">Project Name:</label>
-        <input type="text" id="projectName" name="projectName" required>
-        <br>
-        <label for="client">Client:</label>
-        <input type="text" id="client" name="client" required>
-        <br>
-        <label for="contraType">Contra Type:</label>
-        <input type="text" id="contraType" name="contraType" required>
-        <br>
-        <label for="routine">Routine:</label>
-        <input type="text" id="routine" name="routine" required>
-        <br>
-        <label for="product">Product:</label>
-        <input type="text" id="product" name="product" required>
-        <br>
-        <label for="code">Code:</label>
-        <input type="text" id="code" name="code" required>
-        <br>
-        <label for="batch">Batch:</label>
-        <input type="text" id="batch" name="lot" required>
-        <br>
-        <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" name="startDate" required>
-        <br>
-        <h3>Initial Conditions (Day 0)</h3>
-        <label for="aspect">Aspect:</label>
-        <input type="text" id="aspect" name="day0[aspect]" required>
-        <br>
-        <label for="color">Color:</label>
-        <input type="text" id="color" name="day0[color]" required>
-        <br>
-        <label for="odor">Odor:</label>
-        <input type="text" id="odor" name="day0[odor]" required>
-        <br>
-        <label for="viscosity">Viscosity:</label>
-        <input type="text" id="viscosity" name="day0[viscosity]" required>
-        <br>
-        <label for="ph">PH:</label>
-        <input type="text" id="ph" name="day0[ph]" required>
-        <br>
-        <label for="density">Density:</label>
-        <input type="text" id="density" name="day0[density]" required>
-        <br>
-        <label for="responsible">Responsible:</label>
-        <input type="text" id="responsible" name="responsible" required>
-        <br>
-        <label for="approved">Approved:</label>
-        <input type="checkbox" id="approved" name="approved">
-        <br>
+        <div>
+            <label for="product">Product:</label>
+            <input type="text" id="product" name="product" required>
+        </div>
+        <div>
+            <label for="lot">Lot:</label>
+            <input type="text" id="lot" name="lot" required>
+        </div>
+        <div>
+            <label for="nature">Nature:</label>
+            <input type="text" id="nature" name="nature" required>
+        </div>
+        <div>
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+
+        <h2>Initial Conditions (Day 0)</h2>
+        <div id="initial-conditions">
+            <div>
+                <label for="aspect">Aspect:</label>
+                <input type="text" id="aspect" name="initialConditions[aspect]">
+            </div>
+            <div>
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="initialConditions[color]">
+            </div>
+            <div>
+                <label for="odor">Odor:</label>
+                <input type="text" id="odor" name="initialConditions[odor]">
+            </div>
+            <div>
+                <label for="pH">pH:</label>
+                <input type="text" id="pH" name="initialConditions[pH]">
+            </div>
+            <div>
+                <label for="viscosity">Viscosity:</label>
+                <input type="text" id="viscosity" name="initialConditions[viscosity]">
+            </div>
+        </div>
+
+        <div>
+            <label for="responsible">Responsible:</label>
+            <input type="text" id="responsible" name="responsible" required>
+        </div>
+        
+        <div>
+            <label for="approved">Approved:</label>
+            <input type="checkbox" id="approved" name="approved">
+        </div>
+
         <h3>Comments</h3>
-        <label for="commentText">Comment:</label>
-        <textarea id="commentText" name="comment[text]"></textarea>
-        <br>
-        <label for="commentCreatedBy">Created By:</label>
-        <input type="text" id="commentCreatedBy" name="comment[createdBy]">
-        <br>
+        <div>
+            <label for="commentText">Comment:</label>
+            <textarea id="commentText" name="comment"></textarea>
+        </div>
+
         <button type="submit">Create Study</button>
     </form>
-
     <script src="/js/create.js"></script>
 </body>
 </html>

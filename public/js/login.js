@@ -30,15 +30,15 @@ document.getElementById('login-form').addEventListener('submit', async function(
     }
 });
 
-function checkTokenExpiration() {
-    const expirationTime = sessionStorage.getItem('tokenExpiration');
-    if (expirationTime && new Date().getTime() > expirationTime) {
+// function checkTokenExpiration() {
+//     const expirationTime = sessionStorage.getItem('tokenExpiration');
+//     if (expirationTime && new Date().getTime() > expirationTime) {
 
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('tokenExpiration');
-        alert('Sua sessão expirou. Por favor, faça login novamente.');
-        window.location.href = '/login';
-    }
-}
+//         sessionStorage.removeItem('token');
+//         sessionStorage.removeItem('tokenExpiration');
+//         alert('Sua sessão expirou. Por favor, faça login novamente.');
+//         window.location.href = '/login';
+//     }
+// }
 
-window.onload = checkTokenExpiration;
+// window.onload = checkTokenExpiration;
