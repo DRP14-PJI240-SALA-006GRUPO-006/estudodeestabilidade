@@ -57,7 +57,8 @@ const stabilityStudySchema = new Schema({
     },
     comments: {
         type: Map,
-        of: commentSchema
+        of: commentSchema,
+        default: new Map()
     },
     approved: Boolean,
     responsible: String

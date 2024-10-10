@@ -22,14 +22,17 @@ exports.createStudy = async (req, res) => {
             responsible,
             approved,
             conditions,
-            comments: comments ? new Map(Object.entries(comments)) : undefined
+            comments: new Map(comments ? Object.entries(comments) : [])  // Sempre inicializa como um Map vazio se não houver comentários
         });
 
         const study = await newStudy.save();
         res.json(study);
     } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Erro no servidor');
+        console.error('Erro ao criar estudo:', err);
+        res.status(500).json({
+            error: 'Erro ao criar estudo',
+            details: err.message
+        });
     }
 };
 
@@ -67,6 +70,11 @@ exports.updateStudy = async (req, res) => {
         const study = await StabilityStudy.findById(req.params.id);
         if (!study) {
             return res.status(404).json({ msg: 'Estudo não encontrado' });
+        }
+
+        // Inicializar o Map de comentários se não existir
+        if (!study.comments) {
+            study.comments = new Map();
         }
 
         // Atualizar condições

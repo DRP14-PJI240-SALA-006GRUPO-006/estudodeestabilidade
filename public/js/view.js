@@ -9,6 +9,7 @@ async function loadStudy() {
     document.getElementById('lot').textContent = study.lot;
     document.getElementById('nature').textContent = study.nature;
     document.getElementById('startDate').textContent = new Date(study.startDate).toLocaleDateString();
+
     
     // Preencher os campos da leitura inicial se existirem
     if (study.conditions && study.conditions.estufa && study.conditions.estufa.day0) {
@@ -267,5 +268,11 @@ document.body.appendChild(form);
 const conditionsTables = document.createElement('div');
 conditionsTables.id = 'conditionsTables';
 form.appendChild(conditionsTables);
+
+
+    //prenche campo de aprova e campo de responsável
+    document.getElementById('aprovado').textContent = study.approved ? console.log('teste') : console.log('teste');
+    document.getElementById('reprovado').textContent = study.conditions.estufa.day0.aspect || '';
+    document.getElementById('responsavel').textContent = study.responsible || '';
 
 loadStudy();
