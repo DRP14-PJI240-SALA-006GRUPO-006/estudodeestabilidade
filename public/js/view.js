@@ -10,7 +10,7 @@ async function loadStudy() {
     document.getElementById('nature').textContent = study.nature;
     document.getElementById('startDate').textContent = new Date(study.startDate).toLocaleDateString();
 
-    
+
     // Preencher os campos da leitura inicial se existirem
     if (study.conditions && study.conditions.estufa && study.conditions.estufa.day0) {
         document.getElementById('aspect').textContent = study.conditions.estufa.day0.aspect || '';
@@ -20,16 +20,65 @@ async function loadStudy() {
         document.getElementById('viscosity').textContent = study.conditions.estufa.day0.viscosity || '';
     }
 
+    // Adicione esta função ao seu arquivo view.js
+    function createApprovalSection(study) {
+        const approvalContainer = document.getElementById('approvedAndResponsible');
+
+        // Criar radio buttons para aprovação
+        const approvedRadio = document.createElement('input');
+        approvedRadio.type = 'radio';
+        approvedRadio.id = 'approvedRadio';
+        approvedRadio.name = 'approval';
+        approvedRadio.value = 'approved';
+        approvedRadio.checked = study.approved === true;
+
+        const rejectedRadio = document.createElement('input');
+        rejectedRadio.type = 'radio';
+        rejectedRadio.id = 'rejectedRadio';
+        rejectedRadio.name = 'approval';
+        rejectedRadio.value = 'rejected';
+        rejectedRadio.checked = study.approved === false;
+
+        // Criar labels para os radio buttons
+        const approvedLabel = document.createElement('label');
+        approvedLabel.htmlFor = 'approvedRadio';
+        approvedLabel.textContent = 'APROVADO';
+
+        const rejectedLabel = document.createElement('label');
+        rejectedLabel.htmlFor = 'rejectedRadio';
+        rejectedLabel.textContent = 'REPROVADO';
+
+        // Criar input para responsável
+        const responsibleInput = document.createElement('input');
+        responsibleInput.type = 'text';
+        responsibleInput.id = 'responsibleInput';
+        responsibleInput.placeholder = 'Nome do responsável';
+        responsibleInput.value = study.responsible || '';
+
+        const responsibleLabel = document.createElement('label');
+        responsibleLabel.htmlFor = 'responsibleInput';
+        responsibleLabel.textContent = 'RESPONSÁVEL:';
+
+        // Limpar e adicionar os elementos ao container
+        approvalContainer.innerHTML = '';
+        approvalContainer.appendChild(approvedRadio);
+        approvalContainer.appendChild(approvedLabel);
+        approvalContainer.appendChild(rejectedRadio);
+        approvalContainer.appendChild(rejectedLabel);
+        approvalContainer.appendChild(responsibleLabel);
+        approvalContainer.appendChild(responsibleInput);
+    }
+
     // Função para criar as tabelas com campos editáveis
     function createTable(title, data, conditionKey) {
         const tableContainer = document.createElement('div');
         const h2 = document.createElement('h2');
         h2.textContent = title;
         tableContainer.appendChild(h2);
-    
+
         const table = document.createElement('table');
         table.setAttribute('border', '1');
-    
+
         // Cabeçalho
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
@@ -41,19 +90,19 @@ async function loadStudy() {
         });
         thead.appendChild(headerRow);
         table.appendChild(thead);
-    
+
         // Corpo da Tabela com inputs editáveis
         const tbody = document.createElement('tbody');
         data.forEach(entry => {
             const row = document.createElement('tr');
-    
+
             const dayCell = document.createElement('td');
             dayCell.textContent = entry.day;
             row.appendChild(dayCell);
-    
+
             // Gerar ID do caminho para cada campo
             const baseId = `${conditionKey}.${entry.day}`;
-    
+
             // Função auxiliar para criar uma célula de input com ID personalizado
             function createCell(field, value) {
                 const cell = document.createElement('td');
@@ -64,17 +113,17 @@ async function loadStudy() {
                 cell.appendChild(input);
                 return cell;
             }
-    
+
             row.appendChild(createCell('aspect', entry.aspect));
             row.appendChild(createCell('color', entry.color));
             row.appendChild(createCell('odor', entry.odor));
             row.appendChild(createCell('pH', entry.pH));
             row.appendChild(createCell('viscosity', entry.viscosity));
-    
+
             tbody.appendChild(row);
         });
         table.appendChild(tbody);
-    
+
         tableContainer.appendChild(table);
         document.getElementById('conditionsTables').appendChild(tableContainer);
     }
@@ -112,7 +161,7 @@ async function loadStudy() {
     function createCommentElement(commentObj) {
         const commentDiv = document.createElement('div');
         commentDiv.className = 'comment-item';
-        
+
         const dateParagraph = document.createElement('p');
         dateParagraph.textContent = `Data: ${new Date(commentObj.date).toLocaleDateString()}`;
         commentDiv.appendChild(dateParagraph);
@@ -136,7 +185,7 @@ async function loadStudy() {
         commentInput.type = 'text';
         commentInput.placeholder = 'Digite seu comentário aqui';
         commentInput.className = 'new-comment';
-        
+
         newCommentDiv.appendChild(commentInput);
         commentsList.appendChild(newCommentDiv);
     }
@@ -145,7 +194,9 @@ async function loadStudy() {
         const updatedData = {
             conditions: {},
             newComments: [],
-            updatedComments: []
+            updatedComments: [],
+            approved: document.getElementById('approvedRadio').checked,
+            responsible: document.getElementById('responsibleInput').value.trim()
         };
 
         // Coletar mudanças nas condições
@@ -157,7 +208,7 @@ async function loadStudy() {
             if (originalValue !== currentValue) {
                 const path = input.id.split('.');
                 let currentObj = updatedData.conditions;
-                
+
                 for (let i = 0; i < path.length - 1; i++) {
                     const key = path[i];
                     if (!currentObj[key]) {
@@ -165,7 +216,7 @@ async function loadStudy() {
                     }
                     currentObj = currentObj[key];
                 }
-                
+
                 currentObj[path[path.length - 1]] = currentValue;
             }
         });
@@ -192,8 +243,8 @@ async function loadStudy() {
             }
         });
 
-        if (Object.keys(updatedData.conditions).length === 0 && 
-            updatedData.newComments.length === 0 && 
+        if (Object.keys(updatedData.conditions).length === 0 &&
+            updatedData.newComments.length === 0 &&
             updatedData.updatedComments.length === 0) {
             alert('Nenhuma mudança detectada.');
             return;
@@ -250,6 +301,7 @@ async function loadStudy() {
 
     // Sempre criar a seção de comentários, mesmo que vazia
     createComments('OBSERVAÇÕES:', study.comments || {});
+    createApprovalSection(study);
 
     // Adicionar o botão "Salvar" no formulário
     const saveButton = document.createElement('button');
@@ -269,10 +321,5 @@ const conditionsTables = document.createElement('div');
 conditionsTables.id = 'conditionsTables';
 form.appendChild(conditionsTables);
 
-
-    //prenche campo de aprova e campo de responsável
-    document.getElementById('aprovado').textContent = study.approved ? console.log('teste') : console.log('teste');
-    document.getElementById('reprovado').textContent = study.conditions.estufa.day0.aspect || '';
-    document.getElementById('responsavel').textContent = study.responsible || '';
 
 loadStudy();
