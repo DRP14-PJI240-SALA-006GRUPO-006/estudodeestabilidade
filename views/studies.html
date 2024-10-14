@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/studies.css">
 </head>
 <body>
-    <h1>Studies</h1>
-    <a href="/studies/create">Create New Study</a>
-    <ul id="studies-list"></ul>
+    <div class="container">
+        <h1>Estudos:</h1>
+        <a href="/studies/create" class="create-study-btn">Create New Study</a>
+        <div class="studies-list" id="studies-list">
+            <!-- Os cards de estudo serão inseridos aqui pelo JavaScript -->
+        </div>
+    </div>
     <script src="/js/studies.js"></script>
 </body>
 </html>

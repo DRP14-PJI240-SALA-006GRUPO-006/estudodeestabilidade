@@ -46,3 +46,4 @@ app.listen(PORT, () => {
     console.log(`\nServidor iniciado com sucesso!\n`)
     console.log(`URL -> http://localhost:${PORT}\n`)
 });
+

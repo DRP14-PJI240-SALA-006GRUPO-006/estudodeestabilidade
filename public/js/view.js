@@ -1,6 +1,19 @@
 async function loadStudy() {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+        alert('Você precisa estar logado para buscar um estudo.');
+        window.location.href = '/login';
+        return;
+    }
+
     const studyId = window.location.pathname.split('/').pop();
-    const response = await fetch(`/api/studies/${studyId}`);
+    const response = await fetch(`/api/studies/${studyId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': token
+        }
+    });
     const study = await response.json();
     console.log(study);
 

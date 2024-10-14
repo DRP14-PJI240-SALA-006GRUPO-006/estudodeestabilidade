@@ -7,8 +7,8 @@ const admin = require('../middleware/admin');
 
 // Rotas de estudo de estabilidade
 router.post('/', [auth, admin], StabilityStudyController.createStudy);
-router.get('/', StabilityStudyController.getAllStudies);
-router.get('/:id', StabilityStudyController.getStudyById);
+router.get('/', auth, StabilityStudyController.getAllStudies);
+router.get('/:id', auth, StabilityStudyController.getStudyById);
 router.put('/:id', [auth, admin], StabilityStudyController.updateStudy);
 router.delete('/:id', [auth, admin], StabilityStudyController.deleteStudy);
 
