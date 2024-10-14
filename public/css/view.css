@@ -1,372 +1,225 @@
+/* Estilos Globais */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7; /* Fundo claro para contraste */
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
     margin: 0;
     padding: 20px;
+    color: #333;
 }
 
 h1 {
     text-align: center;
+    font-size: 2rem;
+    color: #4a90e2;
     margin-bottom: 20px;
-    color: #333; /* Texto escuro para maior legibilidade */
 }
 
-.info {
+p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Wrapper principal */
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap; /* Ajusta os elementos em telas pequenas */
+}
+
+/* Estilos para os blocos */
+.blocoA, .blocoB {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    margin-bottom: 20px; /* Espaço entre os blocos */
+}
+
+.blocoA h2, .blocoB h2 {
+    font-size: 1.5rem;
+    color: #4a90e2;
+    margin-bottom: 15px;
+}
+
+/* Tabela Leitura Inicial (Grid) */
+.grid-inital-reading {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.grid-inital-reading .item {
     font-weight: bold;
-    margin-bottom: 20px;
+    color: #333;
 }
 
+.grid-inital-reading .item:nth-child(even) {
+    font-weight: normal;
+    color: #555;
+    background-color: #f7f9fc;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Tabela Legenda (Grid) */
+.grid-legenda {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+}
+
+.grid-legenda .item {
+    font-weight: bold;
+    color: #333;
+}
+
+.grid-legenda .item:nth-child(even) {
+    font-weight: normal;
+    color: #555;
+    background-color: #f7f9fc;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Estilos para as Tabelas de Condições */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    border-radius: 8px; /* Cantos arredondados */
-    overflow: hidden; /* Esconde cantos arredondados */
-    border: 2px solid #333; /* Borda grossa ao redor da tabela */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-table,
-th,
-td {
-    border: 2px solid #333; /* Borda mais grossa */
-}
-
-th,
-td {
-    padding: 8px; /* Diminuído para reduzir o tamanho geral */
-    text-align: left;
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
 }
 
 th {
-    background-color: #e0e0e0; /* Cinza claro para o cabeçalho */
-    color: black; /* Texto preto no cabeçalho */
-}
-
-/* Tabela Leitura Inicial */
-.initialReading {
-    display: grid;
-}
-
-.grid-inital-reading {
-    grid-template-areas:
-        "Data DataValue"
-        "Aspecto AspectoValue"
-        "Cor CorValue"
-        "Odor OdorValue"
-        "pH pHValue"
-        "Viscosidade ViscosidadeValue";
-}
-
-/* Tabela Legenda */
-.legendaGrid {
-    display: grid;
-}
-
-.grid-legenda {
-    grid-template-areas: 
-    "IN inalterado"
-    "LA levementeAlterado"
-    "A alteracao";
-}
-
-/* Tabelas Luz Solar, Escuro, Geladeira e Estufa */
-.title {
+    background-color: #eaf2fb;
     font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    border: 2px solid #333; /* Borda grossa ao redor da grade */
-    border-radius: 8px; /* Cantos arredondados */
-    padding: 10px;
-    background-color: #ffffff; /* Fundo branco */
-}
-
-.grid > div {
-    border: 1px solid #ddd;
+td input {
+    width: 100%;
     padding: 5px;
-    text-align: center;
-}
-
-.grid .leitura,
-.grid .seteDias,
-.grid .quinzeDias,
-.grid .trintaDias,
-.grid .sessentaDias,
-.grid .noventaDias {
-    font-weight: bold;
-    background-color: #f0f0f0; /* Fundo cinza claro para leitura */
-}
-
-.grid .data,
-.grid .aspecto,
-.grid .cor,
-.grid .odor,
-.grid .pH,
-.grid .viscosidade {
-    font-weight: bold;
-    background-color: #e0e0e0; /* Fundo cinza claro */
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 /* Botões */
 button {
-    margin-top: 10px;
-    padding: 8px 15px; /* Tamanho reduzido */
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: #fff;
     border: none;
-    border-radius: 5px; /* Cantos arredondados */
-    background-color: #007bff; /* Cor do botão */
-    color: white; /* Texto branco */
-    cursor: pointer; /* Mão ao passar o mouse */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #0056b3; /* Cor mais escura ao passar o mouse */
+    background-color: #357ab8;
 }
 
-/* Seção de observações */
-#commentsSection {
+/* Botões secundários (Deletar) */
+button.delete {
+    background-color: #ff4444;
+}
+
+button.delete:hover {
+    background-color: #d73838;
+}
+
+/* Seção de aprovação e responsável */
+#approvedAndResponsible {
+    display: flex;
+    justify-content: space-between;
     margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#approvedAndResponsible label {
+    font-weight: bold;
+    color: #555;
+    margin-right: 10px;
+}
+
+#approvedAndResponsible input[type="radio"] {
+    margin-right: 5px;
+}
+
+#approvedAndResponsible input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Seção de Comentários */
+#commentsSection {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .comment-item {
     margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #555;
+    background-color: #f7f9fc;
+    padding: 10px;
+    border-radius: 4px;
 }
 
-/* Estilizando a seção de responsável */
-#approvedAndResponsible {
-    margin-top: 20px;
-}
-
-
-/*body {
-    font-family: Arial, sans-serif;
-}
-
-h1 {
-    text-align: center;
-}
-
-.info {
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-table {
+.comment-item input {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-table,
-th,
-td {
-    border: 1px solid black;
+/* Seção de Tabelas e Botões */
+#conditionsTables {
+    margin-top: 30px;
 }
 
-th,
-td {
-    padding: 10px;
-    text-align: left;
+#conditionsTables h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #4a90e2;
 }
 
-th {
-    background-color: #f2f2f2;
+#conditionsTables div {
+    margin-bottom: 30px;
 }
 
-/*Tabela Leitura inicial
-.initialReading {
-    display: grid;
-}
+/* Responsividade */
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
 
-.grid-inital-reading {
-    grid-template-areas:
-        "Data DataValue"
-        "Aspecto AspectoValue"
-        "Cor CorValue"
-        "Odor OdorValue"
-        "pH pHValue"
-        "Viscosidade ViscosidadeValue"
-    ;
-}
+    #approvedAndResponsible {
+        flex-direction: column;
+    }
 
-/*Tabela Legenda
-.legendaGrid {
-    display: grid;
+    .grid-inital-reading, .grid-legenda {
+        grid-template-columns: 1fr;
+    }
 }
-
-.grid-legenda {
-    grid-template-areas: 
-    "IN inalterado"
-    "LA levementeAlterado"
-    "A alteracao"
-    ;
-}
-
-/*Tabela Luz Solar
-.luzSolarTitle {
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
-.grid-luz-solar {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-.grid-luz-solar > div {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: center;
-}
-
-.grid-luz-solar .leitura,
-.grid-luz-solar .seteDias,
-.grid-luz-solar .quinzeDias,
-.grid-luz-solar .trintaDias,
-.grid-luz-solar .sessentaDias,
-.grid-luz-solar .noventaDias {
-    font-weight: bold;
-    background-color: #f0f0f0;
-}
-
-.grid-luz-solar .dataLuzSolar,
-.grid-luz-solar .aspectoLuzSolar,
-.grid-luz-solar .corLuzSolar,
-.grid-luz-solar .odorLuzSolar,
-.grid-luz-solar .pHLuzSolar,
-.grid-luz-solar .viscosidadeLuzSolar {
-    font-weight: bold;
-    background-color: #e0e0e0;
-}
-
-/*Tabela Escuro*
-.escuroTitle {
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
-.grid-escuro {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-.grid-escuro > div {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: center;
-}
-
-.grid-escuro .leitura,
-.grid-escuro .seteDias,
-.grid-escuro .quinzeDias,
-.grid-escuro .trintaDias,
-.grid-escuro .sessentaDias,
-.grid-escuro .noventaDias {
-    font-weight: bold;
-    background-color: #f0f0f0;
-}
-
-.grid-escuro .dataEscuro,
-.grid-escuro .aspectoEscuro,
-.grid-escuro .corEscuro,
-.grid-escuro .odorEscuro,
-.grid-escuro .pHEscuro,
-.grid-escuro .viscosidadeEscuro {
-    font-weight: bold;
-    background-color: #d0d0d0;
-}
-
-/*Tabela Geladeira
-.geladeiraTitle {
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
-.grid-geladeira {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-.grid-geladeira > div {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: center;
-}
-
-.grid-geladeira .leitura,
-.grid-geladeira .seteDias,
-.grid-geladeira .quinzeDias,
-.grid-geladeira .trintaDias,
-.grid-geladeira .sessentaDias,
-.grid-geladeira .noventaDias {
-    font-weight: bold;
-    background-color: #f0f0f0;
-}
-
-.grid-geladeira .dataGeladeira,
-.grid-geladeira .aspectoGeladeira,
-.grid-geladeira .corGeladeira,
-.grid-geladeira .odorGeladeira,
-.grid-geladeira .pHGeladeira,
-.grid-geladeira .viscosidadeGeladeira {
-    font-weight: bold;
-    background-color: #c0c0c0;
-}
-
-/*Tabela Estufa
-.estufaTitle {
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
-.grid-estufa {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 5px;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-.grid-estufa > div {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: center;
-}
-
-.grid-estufa .leitura,
-.grid-estufa .seteDias,
-.grid-estufa .quinzeDias,
-.grid-estufa .trintaDias,
-.grid-estufa .sessentaDias,
-.grid-estufa .noventaDias {
-    font-weight: bold;
-    background-color: #f0f0f0;
-}
-
-.grid-estufa .dataEstufa,
-.grid-estufa .aspectoEstufa,
-.grid-estufa .corEstufa,
-.grid-estufa .odorEstufa,
-.grid-estufa .pHEstufa,
-.grid-estufa .viscosidadeEstufa {
-    font-weight: bold;
-    background-color: #b0b0b0;
-}
-/*

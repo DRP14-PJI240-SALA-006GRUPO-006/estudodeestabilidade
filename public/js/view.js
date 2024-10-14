@@ -275,6 +275,36 @@ async function loadStudy() {
         }
     }
 
+    async function deleteStudy() {
+        if (!confirm('Tem certeza que deseja deletar este estudo? Esta ação não pode ser desfeita.')) {
+            return;
+        }
+    
+        const studyId = window.location.pathname.split('/').pop();
+        const token = sessionStorage.getItem('token');
+    
+        try {
+            const response = await fetch(`/api/studies/${studyId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': `${token}`
+                }
+            });
+    
+            if (response.ok) {
+                alert('Estudo deletado com sucesso!');
+                window.location.href = '/studies'; // Redirect to the studies list page
+            } else {
+                const errorData = await response.json();
+                alert(`Erro ao deletar o estudo: ${errorData.msg || 'Erro desconhecido'}`);
+            }
+        } catch (error) {
+            console.error('Erro ao deletar:', error);
+            alert('Erro ao deletar o estudo. Por favor, tente novamente.');
+        }
+    }
+
     // Mapeia as condições e cria tabelas automaticamente
     const conditions = {
         'LUZ': study.conditions.luz,
@@ -304,11 +334,25 @@ async function loadStudy() {
     createApprovalSection(study);
 
     // Adicionar o botão "Salvar" no formulário
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.gap = '10px';
+
     const saveButton = document.createElement('button');
     saveButton.textContent = 'Salvar';
     saveButton.type = 'button';
     saveButton.addEventListener('click', saveData);
-    document.getElementById('conditionsTables').appendChild(saveButton);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Deletar';
+    deleteButton.type = 'button';
+    deleteButton.style.backgroundColor = '#ff4444';
+    deleteButton.style.color = 'white';
+    deleteButton.addEventListener('click', deleteStudy);
+
+    buttonContainer.appendChild(saveButton);
+    buttonContainer.appendChild(deleteButton);
+    document.getElementById('conditionsTables').appendChild(buttonContainer);
 }
 
 // Cria o formulário que vai englobar os inputs
