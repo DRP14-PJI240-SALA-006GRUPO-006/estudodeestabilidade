@@ -1,70 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Stability Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/create-study.css">
 </head>
 <body>
-    <h1>Create Stability Study</h1>
-    <form id="create-study-form">
-        <div>
-            <label for="product">Product:</label>
-            <input type="text" id="product" name="product" required>
-        </div>
-        <div>
-            <label for="lot">Lot:</label>
-            <input type="text" id="lot" name="lot" required>
-        </div>
-        <div>
-            <label for="nature">Nature:</label>
-            <input type="text" id="nature" name="nature" required>
-        </div>
-        <div>
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate" name="startDate" required>
-        </div>
+    <div class="container">
+        <h1>NOVO ESTUDO:</h1>
+        <form id="create-study-form" class="study-form">
+            <div class="form-group">
+                <label for="product">Produto:</label>
+                <input type="text" id="product" name="product" required>
+            </div>
+            <div class="form-group">
+                <label for="lot">Lote:</label>
+                <input type="text" id="lot" name="lot" required>
+            </div>
+            <div class="form-group">
+                <label for="nature">Natureza:</label>
+                <input type="text" id="nature" name="nature" required>
+            </div>
+            <div class="form-group">
+                <label for="startDate">Data Inicial:</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
 
-        <h2>Initial Conditions (Day 0)</h2>
-        <div id="initial-conditions">
-            <div>
-                <label for="aspect">Aspect:</label>
-                <input type="text" id="aspect" name="initialConditions[aspect]">
+            <h2>Condições Iniciais:</h2>
+            <div id="initial-conditions" class="initial-conditions">
+                <div class="form-group">
+                    <label for="aspect">Aspecto:</label>
+                    <input type="text" id="aspect" name="initialConditions[aspect]">
+                </div>
+                <div class="form-group">
+                    <label for="color">Cor::</label>
+                    <input type="text" id="color" name="initialConditions[color]">
+                </div>
+                <div class="form-group">
+                    <label for="odor">Odor:</label>
+                    <input type="text" id="odor" name="initialConditions[odor]">
+                </div>
+                <div class="form-group">
+                    <label for="pH">pH:</label>
+                    <input type="text" id="pH" name="initialConditions[pH]">
+                </div>
+                <div class="form-group">
+                    <label for="viscosity">Viscosidade:</label>
+                    <input type="text" id="viscosity" name="initialConditions[viscosity]">
+                </div>
             </div>
-            <div>
-                <label for="color">Color:</label>
-                <input type="text" id="color" name="initialConditions[color]">
-            </div>
-            <div>
-                <label for="odor">Odor:</label>
-                <input type="text" id="odor" name="initialConditions[odor]">
-            </div>
-            <div>
-                <label for="pH">pH:</label>
-                <input type="text" id="pH" name="initialConditions[pH]">
-            </div>
-            <div>
-                <label for="viscosity">Viscosity:</label>
-                <input type="text" id="viscosity" name="initialConditions[viscosity]">
-            </div>
-        </div>
 
-        <div>
-            <label for="responsible">Responsible:</label>
-            <input type="text" id="responsible" name="responsible" required>
-        </div>
-        
-        <div>
-            <label for="approved">Approved:</label>
-            <input type="checkbox" id="approved" name="approved">
-        </div>
+            <div class="form-group">
+                <label for="responsible">Responsável:</label>
+                <input type="text" id="responsible" name="responsible" required>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <label for="approved">
+                    <input type="checkbox" id="approved" name="approved">
+                    Aprovado?
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="commentText">Comentário inicial:</label>
+                <textarea id="commentText" name="comment"></textarea>
+            </div>
 
-        <h3>Comments</h3>
-        <div>
-            <label for="commentText">Comment:</label>
-            <textarea id="commentText" name="comment"></textarea>
-        </div>
-
-        <button type="submit">Create Study</button>
-    </form>
+            <button type="submit" class="submit-btn">CRIAR ESTUDO</button>
+        </form>
+    </div>
     <script src="/js/create.js"></script>
 </body>
 </html>

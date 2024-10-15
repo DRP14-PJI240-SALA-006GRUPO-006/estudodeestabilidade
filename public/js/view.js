@@ -378,5 +378,4 @@ const conditionsTables = document.createElement('div');
 conditionsTables.id = 'conditionsTables';
 form.appendChild(conditionsTables);
 
-
 loadStudy();

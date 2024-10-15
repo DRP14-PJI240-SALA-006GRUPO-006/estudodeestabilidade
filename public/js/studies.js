@@ -17,28 +17,24 @@ async function loadStudies() {
     const studiesList = document.getElementById('studies-list');
     
     studies.forEach(study => {
-        const li = document.createElement('li');
+        const card = document.createElement('div');
+        card.className = 'study-card';
         const nextAnalysisDate = getNextAnalysisDate(study);
         const countdown = getCountdown(nextAnalysisDate);
         
-        li.innerHTML = `
+        card.innerHTML = `
             <a href="/studies/${study._id}">
-                PRODUTO: ${study.product}<br>
-                LOTE: ${study.lot}<br>
-                NATUREZA: ${study.nature}<br>
-                Próxima análise em: ${countdown}
+                <h2>${study.product}</h2>
+                <p class="study-info">Lote: ${study.lot}</p>
+                <p class="study-info">Natureza: ${study.nature}</p>
+                <p class="countdown">Próxima análise em: ${countdown}</p>
             </a>`;
-        studiesList.appendChild(li);
+        studiesList.appendChild(card);
         
         // Atualiza o contador a cada segundo
         setInterval(() => {
             const updatedCountdown = getCountdown(nextAnalysisDate);
-            li.querySelector('a').innerHTML = `
-                PRODUTO: ${study.product}<br>
-                LOTE: ${study.lot}<br>
-                NATUREZA: ${study.nature}<br>
-                Próxima análise em: ${updatedCountdown}
-            `;
+            card.querySelector('.countdown').textContent = `Próxima análise em: ${updatedCountdown}`;
         }, 1000);
     });
 }

@@ -5,7 +5,7 @@ const UserController = require('../controllers/UserController');
 const auth = require('../middleware/auth');
 
 // Rotas de usuário
-router.post('/register', UserController.register);
+router.post('/register', auth, UserController.register);
 router.post('/login', UserController.login);
 router.get('/me', auth, UserController.getUser);
 
