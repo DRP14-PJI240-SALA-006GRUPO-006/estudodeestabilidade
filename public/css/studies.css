@@ -117,3 +117,90 @@ h1 {
 .study-card {
     animation: fadeIn 0.5s ease-out;
 }
+
+/* Estilos existentes... */
+
+/* Novo estilo para a linha de ações */
+.actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.left-actions, .right-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* Ajuste no botão de criar novo estudo */
+.create-study-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.create-study-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Estilos para o campo de pesquisa */
+#search-input {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-right: 10px;
+    width: 250px;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Estilos para o seletor de ordenação */
+#sort-select {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--white);
+    cursor: pointer;
+}
+
+#sort-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .actions-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .left-actions, .right-actions {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    #search-input, #sort-select {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .create-study-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

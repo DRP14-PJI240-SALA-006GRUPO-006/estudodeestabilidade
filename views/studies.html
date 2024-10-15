@@ -9,8 +9,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>Estudos:</h1>
-        <a href="/studies/create" class="create-study-btn">CRIAR NOVO ESTUDO</a>
+        <h1>Estudos</h1>
+    
+        <div class="actions-row">
+            <div class="left-actions">
+                <a href="/studies/create" class="create-study-btn">CRIAR NOVO ESTUDO</a>
+            </div>
+            <div class="right-actions">
+                <input type="text" id="search-input" placeholder="Pesquisar por nome do produto">
+                <select id="sort-select">
+                    <option value="newest">Mais novo para mais antigo</option>
+                    <option value="oldest">Mais antigo para mais novo</option>
+                    <option value="next-analysis">Próxima análise mais próxima</option>
+                </select>
+            </div>
+        </div>
+        
         <div class="studies-list" id="studies-list"></div>
     </div>
     <script src="/js/studies.js"></script>

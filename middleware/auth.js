@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
 
     // Verifica o token
     try {
-        const decoded = jwt.verify(token, 'secrettoken'); // Trocar por uma variável de ambiente em produção
+        const decoded = jwt.verify(token, `${process.env.SECRETTOKEN}`); // Trocar por uma variável de ambiente em produção
         req.user = decoded.user;
         next();
     } catch (err) {
