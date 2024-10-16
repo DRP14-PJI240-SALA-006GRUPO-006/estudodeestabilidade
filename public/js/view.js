@@ -90,7 +90,7 @@ function createTable(title, data, conditionKey, container) {
         <table border="1">
             <thead>
                 <tr>
-                    ${['Dia', 'Aspecto', 'Cor', 'Odor', 'pH', 'Viscosidade'].map(h => `<th>${h}</th>`).join('')}
+                    ${['Dia', 'Aspecto', 'Cor', 'Odor', 'pH', 'Viscosidade (cP)'].map(h => `<th>${h}</th>`).join('')}
                 </tr>
             </thead>
             <tbody>
