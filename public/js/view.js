@@ -47,7 +47,7 @@ function populateStudyData(study) {
     $('#product').textContent = study.product;
     $('#lot').textContent = study.lot;
     $('#nature').textContent = study.nature;
-    $('#startDate').textContent = new Date(study.startDate).toLocaleDateString();
+    $('#startDate').textContent = new Date(study.startDate).toLocaleDateString('pt-BR');
 
     if (study.conditions?.estufa?.day0) {
         const day0 = study.conditions.estufa.day0;
@@ -90,13 +90,13 @@ function createTable(title, data, conditionKey, container) {
         <table border="1">
             <thead>
                 <tr>
-                    ${['Day', 'Aspect', 'Color', 'Odor', 'pH', 'Viscosity'].map(h => `<th>${h}</th>`).join('')}
+                    ${['Dia', 'Aspecto', 'Cor', 'Odor', 'pH', 'Viscosidade'].map(h => `<th>${h}</th>`).join('')}
                 </tr>
             </thead>
             <tbody>
                 ${data.map(entry => `
                     <tr>
-                        <td>${entry.day}</td>
+                        <td>${entry.day.replace('day', 'Dia ')}</td>
                         ${['aspect', 'color', 'odor', 'pH', 'viscosity'].map(field => `
                             <td><input type="text" id="${conditionKey}.${entry.day}.${field}" value="${entry[field] || ''}"></td>
                         `).join('')}
@@ -118,7 +118,7 @@ function createComments(title, comments = {}) {
         <div id="commentsList">
             ${Object.entries(comments).map(([key, comment]) => `
                 <div class="comment-item">
-                    <p>Data: ${new Date(comment.date).toLocaleDateString()}</p>
+                    <p>Data: ${new Date(comment.date).toLocaleDateString('pt-BR')}</p>
                     <input type="text" class="existing-comment" data-comment-id="${comment._id}" value="${comment.comment}">
                 </div>
             `).join('')}
@@ -238,7 +238,7 @@ async function saveData() {
         }
     } catch (error) {
         log('Erro ao salvar:', error);
-        alert('Erro ao salvar os dados.');
+        alert('Erro ao salvar os dados. Por favor, tente novamente.');
     }
 }
 

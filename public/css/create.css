@@ -115,6 +115,38 @@ textarea {
     border-radius: 5px;
 }
 
+/*botão de voltar*/
+.top-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.right-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.back-btn{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.back-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+
 /* Responsividade */
 @media (max-width: 600px) {
     .container {
